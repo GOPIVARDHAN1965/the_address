@@ -90,15 +90,42 @@ button:hover, a:hover {
     </div>
   </div>
 </div>
+{% endif %}
+<hr>
+{% if family_data|length < 1 %}
+<h1> No family memeber. Add family members below</h1>
+{% else %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">S.no</th>
+      <th scope="col">Name</th>
+      <th scope="col">Relation</th>
+      <th scope="col">Mobile Number</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for each_member in family_data %}
+    <tr>
+      <th scope="row">{{ family_data.index(each_member)+1 }}</th>
+      <td>{{each_member['member_name']}}</td>
+      <td>{{each_member['member_relation']}}</td>
+      <td>{{each_member['member_number']}}</td>
+      <td>
+        <a href="#">Delete</a>
+        <br>
+        <a href="#">Update</a>
+    </td>
+    </tr>
+    {% endfor %}
 
-
-<!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
+  </tbody>
+</table>
 
 {% endif %}
 
-
+<div class="container" >
+<a href="{{ url_for('add_member') }}">Add member</a>
+</div>
 {% endblock %}  

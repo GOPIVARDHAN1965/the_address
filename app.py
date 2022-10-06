@@ -87,23 +87,12 @@ def home():
             b_img = img.get(owner_data['image'])
             base64_data = codecs.encode(b_img.read(), 'base64')
             b_img=base64_data.decode('utf-8')
-            if 'family_details' in owner_data:
-                pass
-            print('no family')
-            # {'owner_name': owner_data['owner_name'], 'phone_number': owner_data['user_id'], }
-            return render_template('home.html', family_details=[],owner_data = owner_data, b=b_img)
+            if 'family_data' in owner_data:
+                print(owner_data['family_data'])
+                return render_template('home.html', family_data=owner_data['family_data'],owner_data = owner_data, b=b_img)
+            return render_template('home.html', family_data=[],owner_data = owner_data, b=b_img)
         else:
             return render_template('home.html', owner_data = [])
-
-        # if request.method == 'POST':
-        #     a=img.put(request.files['pic'],user_id=user_data['_id'], user_relation = 'Owner')
-        #     b=img.get(a)
-        #     base64_data = codecs.encode(b.read(), 'base64')
-        #     b=base64_data.decode('utf-8')
-        #     users.update_one({'_id':user_data['_id']}, {'$push': {'flat': request.form['flat'], 'block': request.form['block'], 'Owner_name': request.form['o_name']}})
-        #     return render_template('show.html',b=b)
-
-        # return render_template('home.html')
     return redirect('/login')
 
 
@@ -118,7 +107,20 @@ def add_owner_details():
         users.update_one({'_id':user_data['_id']}, {'$set': {'flat': request.form['flat'], 'block': request.form['block'], 'owner_name': request.form['owner_name'], 'image': a}})
         return redirect('/')
 
-
+@app.route('/add_member',methods=['POST','GET'])
+def add_member():
+    user_data = users.find_one({'user_id': session['user_id']})
+    if request.method=='POST':
+        a=img.put(request.files['member_pic'],user_id=user_data['_id'], user_relation = request.form['member_relation'])
+        dict = {'member_name': request.form['member_name'],
+        'image': a,
+        'member_relation': request.form['member_relation'],
+        'member_number': request.form['member_number']
+        }
+        users.update_one({'_id':user_data['_id']}, {'$push': {'family_data': dict }})
+        return redirect('/')
+    print("inside add_member")
+    return render_template('add.html')
 
 
 

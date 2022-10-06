@@ -13,29 +13,41 @@
 
 {% block body %}
 
+<h4>Member Details</h4>
 <div class="container" style="text-align:left;">
-  <form class="col "  method="post" action="{{ url_for('home') }}" enctype="multipart/form-data">
+  <form class="col "  method="post" action="{{ url_for('add_member') }}" enctype="multipart/form-data">
     <!-- <div class="col-md-6">
       <label for="inputEmail4" class="form-label">User id</label>
       <input type="email" class="form-control" id="inputEmail4" >
     </div> -->
     <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">Block</label>
-      <input type="text" class="form-control" name="block" placeholder="1-13">
+      <label for="inputPassword4" class="form-label">Name</label>
+      <input type="text" class="form-control" name="member_name" placeholder="name">
     </div>
     <div class="col-6">
-      <label for="inputAddress" class="form-label">Flat</label>
-      <input type="text" class="form-control" placeholder="eg.101A" name="flat">
+      <label for="inputAddress" class="form-label">Mobile number</label>
+      <input type="text" class="form-control" placeholder="" name="member_number">
     </div>
     <div class="col-6">
-      <label for="inputCity" class="form-label">Owners name</label>
-      <input type="text" class="form-control" name="o_name">
+      <label for="exampleFormControlSelect1">Member Relation to Owner</label>
+      <select class="form-control" id="exampleFormControlSelect1" name="member_relation">
+        <option>Husband</option>
+        <option>Wife</option>
+        <option>Son</option>
+        <option>Daughter</option>
+        <option>Father</option>
+        <option>Mother</option>
+        <option>Sister</option>
+        <option>Brother</option>
+        <option>In-laws</option>
+        <option>Guest</option>
+      </select>
     </div>
+
     <div class="col-6">
-      <label for="inputCity" class="form-label">User Photo</label>
-      <input type="file" class="form-control" id="myfile" name="pic">
+      <label for="inputCity" class="form-label">Member Photo</label>
+      <input type="file" class="form-control" id="myfile" name="member_pic">
     </div>
-   
 
     <div class="col-12" style="text-align: center;">
       <button type="submit" class="btn btn-primary">submit</button>
@@ -43,13 +55,4 @@
   </form>
 </div>
 
-
-<footer class="my-5 pt-5 text-muted text-center text-small">
-  <p class="mb-1">&copy; 2017–2022 Company Name</p>
-  <ul class="list-inline">
-    <li class="list-inline-item"><a href="#">Privacy</a></li>
-    <li class="list-inline-item"><a href="#">Terms</a></li>
-    <li class="list-inline-item"><a href="#">Support</a></li>
-  </ul>
-</footer>
 {% endblock %}  
