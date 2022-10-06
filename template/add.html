@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<style>
+    .container {
+  max-width: 960px;
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container" style="text-align:left;">
+  <form class="col "  method="post" action="{{ url_for('home') }}" enctype="multipart/form-data">
+    <!-- <div class="col-md-6">
+      <label for="inputEmail4" class="form-label">User id</label>
+      <input type="email" class="form-control" id="inputEmail4" >
+    </div> -->
+    <div class="col-md-6">
+      <label for="inputPassword4" class="form-label">Block</label>
+      <input type="text" class="form-control" name="block" placeholder="1-13">
+    </div>
+    <div class="col-6">
+      <label for="inputAddress" class="form-label">Flat</label>
+      <input type="text" class="form-control" placeholder="eg.101A" name="flat">
+    </div>
+    <div class="col-6">
+      <label for="inputCity" class="form-label">Owners name</label>
+      <input type="text" class="form-control" name="o_name">
+    </div>
+    <div class="col-6">
+      <label for="inputCity" class="form-label">User Photo</label>
+      <input type="file" class="form-control" id="myfile" name="pic">
+    </div>
+   
+
+    <div class="col-12" style="text-align: center;">
+      <button type="submit" class="btn btn-primary">submit</button>
+    </div>
+  </form>
+</div>
+
+
+<footer class="my-5 pt-5 text-muted text-center text-small">
+  <p class="mb-1">&copy; 2017–2022 Company Name</p>
+  <ul class="list-inline">
+    <li class="list-inline-item"><a href="#">Privacy</a></li>
+    <li class="list-inline-item"><a href="#">Terms</a></li>
+    <li class="list-inline-item"><a href="#">Support</a></li>
+  </ul>
+</footer>
+{% endblock %}  

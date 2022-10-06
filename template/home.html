@@ -1,0 +1,104 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<style>
+  .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
+
+{% endblock %}
+
+
+{% block body %}
+{% if owner_data|length < 1 %}
+<h4>please fill this data</h4>
+<div class="container" style="text-align:left;">
+  <form class="col "  method="post" action="{{ url_for('add_owner_details') }}" enctype="multipart/form-data">
+    <div class="col-6">
+      <label for="inputCity" class="form-label">Owners name</label>
+      <input type="text" class="form-control" name="owner_name">
+    </div>
+    <div class="col-md-6">
+      <label for="inputPassword4" class="form-label">Block</label>
+      <input type="text" class="form-control" name="block" placeholder="1-13">
+    </div>
+    <div class="col-6">
+      <label for="inputAddress" class="form-label">Flat</label>
+      <input type="text" class="form-control" placeholder="eg.101A" name="flat">
+    </div>
+    <div class="col-6">
+      <label for="inputCity" class="form-label">Upload Owners Photo</label>
+      <input type="file" class="form-control" id="myfile" name="owner_pic">
+    </div>
+    <div class="col-12" style="text-align: center;">
+      <button type="submit" class="btn btn-primary">submit</button>
+    </div>
+  </form>
+</div>
+{% else %}
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="data:image/jpeg;base64,{{b}}" class="card-img" >
+    </div>
+    <div class="col-md-8">
+      <div class="card-body" style="text-align: left;">
+        <h5 class="card-title">{{ owner_data['owner_name'] }} </h5>
+        <p class="card-text">Flat: {{ owner_data['flat'] }}</p>
+        <p class="card-text">Block:  {{ owner_data['block'] }}</p>
+        <p class="card-text">email:  {{owner_data['email_id']}}</p>
+        <p class="card-text">Mobile:  {{ owner_data['user_id']}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+{% endif %}
+
+
+{% endblock %}  
