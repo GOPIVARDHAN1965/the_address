@@ -12,35 +12,39 @@
 
 
 {% block body %}
-{% if residants==None %}
-<h1> No Residants to show yet. Ask residants to register</h1>
+{% if residents|length < 1 %}
+<h1> No Residents to show yet. Ask residents to register</h1>
 {% else %}
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Flat No.</th>
-      <th scope="col">Block</th>
-      <th scope="col">Photo</th>
-      <th scope="col">Name</th>
-      <th scope="col">Mobile Number</th>
-      <!-- <th scope="col">Action</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    {% for each_member in residants %}
-    <tr>
-      <th scope="row">{{ each_member['flat'] }}</th>
-      <td>{{each_member['block']}}</td>
-      <td>
-            <img src="data:image/jpeg;base64,{{each_member['image']}}" class="card" style="max-width: 111px;" >
-      </td>
-      <td>{{each_member['name']}}</td>
-      <td>{{each_member['m_number']}}</td>
-    </tr>
-    {% endfor %}
-
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Flat No.</th>
+        <th scope="col">Block</th>
+        <!-- <th scope="col">Photo</th> -->
+        <th scope="col">Name</th>
+        <th scope="col">Mobile Number</th>
+        <th scope="col">Action</th>
+        <!-- <th scope="col">Action</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for each_member in residents %}
+      <tr>
+        <th scope="row" class="align-middle">{{ each_member['flat'] }}</th>
+        <td class="align-middle">{{each_member['block']}}</td>
+        <!-- <td class="align-middle">
+              <img src="data:image/jpeg;base64,{{each_member['image']}}" class="card" style="max-width: 111px;" >
+        </td> -->
+        <td class="align-middle">{{each_member['name']}}</td>
+        <td class="align-middle">{{each_member['m_number']}}</td>
+        <td class="align-middle"><a href="/view_more_info/{{each_member['m_number']}}">View more info</a></td>
+      </tr>
+      {% endfor %}
+  
+    </tbody>
+  </table>
+</div>
 {% endif %}
 
 <!-- <img src="data:image/jpeg;base64,{{b}}">

@@ -49,30 +49,7 @@ button:hover, a:hover {
 
 {% block body %}
 {% if owner_data|length < 1 %}
-<h4>please fill this data</h4>
-<div class="container" style="text-align:left;">
-  <form class="col "  method="post" action="{{ url_for('add_owner_details') }}" enctype="multipart/form-data">
-    <div class="col-6">
-      <label for="inputCity" class="form-label">Owners name</label>
-      <input type="text" class="form-control" name="owner_name">
-    </div>
-    <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">Block</label>
-      <input type="text" class="form-control" name="block" placeholder="1-13">
-    </div>
-    <div class="col-6">
-      <label for="inputAddress" class="form-label">Flat</label>
-      <input type="text" class="form-control" placeholder="eg.101A" name="flat">
-    </div>
-    <div class="col-6">
-      <label for="inputCity" class="form-label">Upload Owners Photo</label>
-      <input type="file" class="form-control" id="myfile" name="owner_pic">
-    </div>
-    <div class="col-12" style="text-align: center;">
-      <button type="submit" class="btn btn-primary">submit</button>
-    </div>
-  </form>
-</div>
+<h4>Owner has not filled the data. please contact the owner at {{owner_data['user_id']}}</h4>
 {% else %}
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
@@ -93,7 +70,7 @@ button:hover, a:hover {
 {% endif %}
 <hr>
 {% if family_data|length < 1 %}
-<h1> No family memeber. Add family members below</h1>
+<h1> No family memebers added by the Owner.</h1>
 {% else %}
 <table class="table table-striped">
   <thead>
@@ -116,11 +93,6 @@ button:hover, a:hover {
       <td class="align-middle">{{each_member['member_name']}}</td>
       <td class="align-middle">{{each_member['member_relation']}}</td>
       <td class="align-middle">{{each_member['member_number']}}</td>
-      <!-- <td>
-        <a href="#">Delete</a>
-        <br>
-        <a href="#">Update</a>
-    </td> -->
     </tr>
     {% endfor %}
 
@@ -128,8 +100,4 @@ button:hover, a:hover {
 </table>
 
 {% endif %}
-
-<div class="container" >
-<a href="{{ url_for('add_member') }}">Add member</a>
-</div>
 {% endblock %}  
