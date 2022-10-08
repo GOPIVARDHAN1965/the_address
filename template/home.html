@@ -99,24 +99,28 @@ button:hover, a:hover {
   <thead>
     <tr>
       <th scope="col">S.no</th>
+      <th scope="col">Photo</th>
       <th scope="col">Name</th>
       <th scope="col">Relation</th>
       <th scope="col">Mobile Number</th>
-      <th scope="col">Action</th>
+      <!-- <th scope="col">Action</th> -->
     </tr>
   </thead>
   <tbody>
     {% for each_member in family_data %}
     <tr>
       <th scope="row">{{ family_data.index(each_member)+1 }}</th>
+      <td>
+            <img src="data:image/jpeg;base64,{{images[family_data.index(each_member)]}}" class="card" style="max-width: 111px;" >
+      </td>
       <td>{{each_member['member_name']}}</td>
       <td>{{each_member['member_relation']}}</td>
       <td>{{each_member['member_number']}}</td>
-      <td>
+      <!-- <td>
         <a href="#">Delete</a>
         <br>
         <a href="#">Update</a>
-    </td>
+    </td> -->
     </tr>
     {% endfor %}
 

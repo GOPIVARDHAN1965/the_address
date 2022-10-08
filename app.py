@@ -76,6 +76,43 @@ def login():
     return render_template('login.html')
 
 
+####################################################
+#Admin Side pages
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################################################
+#User Side pages
 @app.route('/',methods=['POST','GET'])
 def home():
     if 'user_id' in session:
@@ -88,15 +125,20 @@ def home():
             base64_data = codecs.encode(b_img.read(), 'base64')
             b_img=base64_data.decode('utf-8')
             if 'family_data' in owner_data:
-                print(owner_data['family_data'])
-                return render_template('home.html', family_data=owner_data['family_data'],owner_data = owner_data, b=b_img)
+                l=[]
+                for each_member in owner_data['family_data']:
+                    photo= img.get(each_member['image'])
+                    base64_data = codecs.encode(photo.read(), 'base64')
+                    photo = base64_data.decode('utf-8')
+                    l.append(photo)
+                return render_template('home.html', family_data=owner_data['family_data'],owner_data = owner_data, b=b_img, images=l)
             return render_template('home.html', family_data=[],owner_data = owner_data, b=b_img)
         else:
             return render_template('home.html', owner_data = [])
     return redirect('/login')
 
 
-@app.route('/addownerdetails',methods=['POST'])
+@app.route('/add_owner_details',methods=['POST'])
 def add_owner_details():
     user_data = users.find_one({'user_id': session['user_id']})
     if request.method == 'POST':
