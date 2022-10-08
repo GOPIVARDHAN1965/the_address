@@ -6,7 +6,7 @@ from fileinput import filename
 from turtle import done
 from urllib import response
 import bcrypt
-from flask import Flask, flash, get_flashed_messages, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for
 import pymongo
 import gridfs
 
@@ -71,18 +71,27 @@ def login():
                 return redirect(url_for('home'))
                 # return render_template('index.html')
             else:
-                flash("Wrong password", "warning")
                 return redirect(url_for('login'))
     return render_template('login.html')
 
 
 ####################################################
 #Admin Side pages
-
-
-
-
-
+@app.route('/show_all_residants')
+def show_all_residants():
+    residants = users.find()
+    l=[]
+    for each_member in residants:
+        photo= img.get(each_member['image'])
+        base64_data = codecs.encode(photo.read(), 'base64')
+        photo = base64_data.decode('utf-8')
+        dict = {'name':each_member['owner_name'],
+                'flat': each_member['flat'],
+                'block': each_member['block'],
+                'm_number': each_member['user_id'],
+                'image': photo}
+        l.append(dict)
+    return render_template('show.html', residants = l)
 
 
 

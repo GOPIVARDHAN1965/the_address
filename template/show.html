@@ -12,6 +12,37 @@
 
 
 {% block body %}
-<!-- <img src="data:image/jpeg;base64,{{b}}"> -->
-<img src="data:image/jpeg;base64,{{b}}" style="height:150px;">
+{% if residants==None %}
+<h1> No Residants to show yet. Ask residants to register</h1>
+{% else %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Flat No.</th>
+      <th scope="col">Block</th>
+      <th scope="col">Photo</th>
+      <th scope="col">Name</th>
+      <th scope="col">Mobile Number</th>
+      <!-- <th scope="col">Action</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    {% for each_member in residants %}
+    <tr>
+      <th scope="row">{{ each_member['flat'] }}</th>
+      <td>{{each_member['block']}}</td>
+      <td>
+            <img src="data:image/jpeg;base64,{{each_member['image']}}" class="card" style="max-width: 111px;" >
+      </td>
+      <td>{{each_member['name']}}</td>
+      <td>{{each_member['m_number']}}</td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endif %}
+
+<!-- <img src="data:image/jpeg;base64,{{b}}">
+<img src="data:image/jpeg;base64,{{b}}" style="height:150px;"> -->
 {% endblock %}  
